@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0251b6a817.js" crossorigin="anonymous"></script>
+</head>
+<style>
+
+
+*{
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    color: rgb(22, 20, 20);
+    font-weight: bold;
+    font-size: 20px;
+    height: 100vh;
+}
+.wather_app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #50a3a2;
+    background: linear-gradient( top left, #50a3a2 0% ,#53e3a6 100%);
+    background: linear-gradient(  to bottom right,#50a3a2 0%,#54c093 100%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+   
+}
+.box{
+    width: 20vw;
+    height: 50vh;
+    background-color: rgb(155, 197, 197);
+    position: absolute;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 3rem rgba(0,0,0,0.2);
+    transform: translate3d(0,0,0);
+    transition-property: width,height;
+    transition-duration: 2s;
+} 
+ .box:hover{
+    width: 200px;
+    height: 400px;
+}
+.information{
+    /* position: absolute; */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center ;
+    text-align: center;
+    margin-top: 50%;
+    padding: 40px;
+    color: black;
+    font-weight: bold;
+    /* z-index: -1; */
+  
+}
+#wather_icon{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+     width: 100%;
+    height: 10%;
+    align-items: center;
+}
+.fa-sun{
+   
+    /* height: 5vh; */
+    margin-top: 90px; 
+    color: yellow; 
+}
+.wave{
+    opacity: 0.3;
+    position: absolute;
+    background: rgb(104, 161, 236);
+    border-radius: 48%; 
+    margin-right: -25rem;
+    margin-left: -15rem;
+    top: 50%;
+    left: 50%;
+    width: 30rem;
+    height: 30rem;
+    z-index: 1;
+    opacity: 0.3;
+    transform-origin: 50% 48%;
+    animation: drift 3000ms infinite linear; 
+}
+
+.wave.-two {
+    animation: drift 6000ms infinite linear;
+    z-index: 2 !important;
+    opacity: 0.2;
+}
+.wave.-three{
+    animation: drift 7000ms infinite linear;
+    z-index: 3 !important;
+    opacity: 0.1;
+}
+.box::after{
+    content: "";
+    display: block;
+    left: 0;
+    top: 0;
+    z-index: 11;
+    transform: translate3d(0,0,0);
+}
+
+@keyframes drift {
+    from{
+        transform: rotate(0deg);
+    }
+  to{
+       transform: rotate(360deg);
+   }
+    
+}
+.fa-street-view{
+    animation: rotate 1s linear infinite alternate;
+    padding: 10px;
+}
+@keyframes rotate {
+    from{
+        transform: translateX(-0.5rem);
+    }
+    to{
+        transform: translateX(0.5rem);
+    } 
+}
+.location h2{
+    font-weight: 900;
+}
+ 
+.fa-sun{
+    font-size: 6rem;
+    animation: fa-anime 3s linear infinite alternate; 
+}
+@keyframes fa-anime {
+    from{
+        transform: scale(1.1);
+    }
+    to{
+        transform: scale(1.4);
+    }
+}
+</style>
+<body>
+    <div class="wather_app">
+        <div class="box">
+            <div class="wave  -one"></div>
+            <div class="wave -two"></div>
+            <div class="wave -three"></div>
+            <div id="wather_icon">
+                <i class="fas fa-sun"></i>
+            </div>
+            <div class="information">
+                <h2 class="location"><i class="fa fa-street-view" aria-hidden="true"></i>{%location%},{%country%}</h2>
+                <p id="date">WED | SEP 20 | 10:50AM</p>
+                <h1 class="temp"> {%tempvalue%} </h1>
+                <h3 class="mintemp">Min {%tempvaluemin%} | MAX {%tempvaluemax%} </h3>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // get current date
+
+        const curDate = document.getElementById('date')
+
+        let wather_icon = document.getElementById('wather_icon')
+
+        // check atmosphere
+
+        const tempStatus = "{%tempstatus%}";
+        if (tempStatus == 'Sunny') {
+            wather_icon.innerHTML = '<i class="fas fa-sun"></i>';
+        } else if (tempStatus == 'Clouds') {
+            wather_icon.innerHTML = "<i class='fas fa-clouds' style = 'color: #f1f2f6 ;'></i>";
+        }
+        else if (tempStatus == 'Rainy') {
+            wather_icon.innerHTML = "<i class='fas fa-rain' style = 'color: #a4b0be ;'></i>"
+        }
+
+        // get current Day 
+
+        const getCurrentDay = () => {
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            let currentTime = new Date();
+            let day = (weekday[currentTime.getDay()]);
+            return day;
+        }
+
+        //get current Time 
+        const getCurrenTime = () => {
+            // months
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ];
+            var next = new Date();
+            var month = months[next.getMonth()]; // start data 0 i.e. +1
+            var date = next.getDate();
+
+
+            var hours = next.getHours();
+            var mins = next.getMinutes();
+
+            var periods = 'AM';
+
+            if (hours > 11) {
+                periods = 'PM';
+                if (hours > 12) hours -= 12;
+            }
+            if (mins < 10) {
+                mins = '0' + mins;
+            }
+
+            return `${month}${date} | ${hours}:${mins}${periods}`;
+        };
+        curDate.innerHTML = getCurrenTime() + "|"; getCurrentDay();
+    </script>
+
+</body>
+
+</html>
