@@ -6,6 +6,8 @@ var requests = require('requests');
 
 const homeFile = fs.readFileSync('home.html', 'utf-8');
 
+const port = process.env.PORT || 8000;
+
 
 const replaceVal = (tempvalue, orgvalue)=>{
     let temperature = tempvalue.replace("{%tempvalue%}",orgvalue.main.temp);
