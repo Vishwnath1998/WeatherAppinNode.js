@@ -18,7 +18,6 @@
 *{
     margin: 0;
     padding: 0;
-    /* box-sizing: border-box; */
     font-family: 'Roboto', sans-serif;
 }
 body{
@@ -59,7 +58,6 @@ body{
     height: 400px;
 }
 .information{
-    /* position: absolute; */
     display: flex;
     flex-direction: column; 
     justify-content: center ;
@@ -68,7 +66,6 @@ body{
     padding: 40px;
     color: black;
     font-weight: bold;
-    /* z-index: -1; */
   
 }
 #wather_icon{
@@ -81,7 +78,6 @@ body{
 }
 .fa-sun{
    
-    /* height: 5vh; */
     margin-top: 90px; 
     color: yellow; 
 }
@@ -171,7 +167,7 @@ body{
             <div class="information">
                 <h2 class="location"><i class="fa fa-street-view" aria-hidden="true"></i>{%location%},{%country%}</h2>
                 <p id="date">WED | SEP 20 | 10:50AM</p>
-                <h1 class="temp"> {%tempvalue%} </h1>
+                <h1 class="temp"> {%tempvalue%}; </h1>
                 <h3 class="mintemp">Min {%tempvaluemin%} | MAX {%tempvaluemax%} </h3>
             </div>
         </div>
